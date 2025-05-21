@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday My Love - Storytelling</title>
+<style>
+  body {
+    margin: 0; padding: 0;
+    background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #444;
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    padding: 30px 15px 10px;
+    color: #d63384;
+  }
+  header h1 {
+    font-size: 3em;
+    margin-bottom: 0.1em;
+  }
+  header p {
+    font-size: 1.3em;
+    font-weight: 600;
+    font-style: italic;
+  }
+  .characters {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 40px auto 60px;
+    flex-wrap: wrap;
+  }
+  .characters div {
+    text-align: center;
+  }
+  .characters img {
+    width: 160px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(214,51,132,0.3);
+    transition: transform 0.3s ease;
+  }
+  .characters img:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+  .section {
+    max-width: 850px;
+    margin: 0 auto 60px;
+    padding: 0 15px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+  }
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .section h2 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: #d63384;
+    border-bottom: 3px solid #e91e63;
+    padding-bottom: 6px;
+    font-weight: 700;
+  }
+  .section p {
+    font-size: 1.15em;
+    line-height: 1.8em;
+    margin-bottom: 30px;
+  }
+
+  /* Slideshow styles */
+  .slideshow-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+    background: white;
+  }
+  .slide {
+    display: none;
+  }
+  .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* Controls */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    background-color: rgba(233, 30, 99, 0.7);
+    border-radius: 50%;
+    user-select: none;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+  }
+  .prev:hover, .next:hover {
+    background-color: #e91e63;
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
+
+  /* Floating hearts */
+  .hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff6fa7;
+    transform: rotate(-45deg);
+    animation: float 8s infinite ease-in;
+  }
+  .heart::before,
+  .heart::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #ff6fa7;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    left: 10px;
+  }
+  @keyframes float {
+    from { transform: translateY(0) rotate(-45deg); opacity: 1; }
+    to { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
+  }
+
+  /* Final I LOVE YOU animation */
+  #final-love {
+    text-align: center;
+    font-size: 4em;
+    font-weight: 900;
+    color: #e91e63;
+    text-shadow:
+      0 0 10px #f48fb1,
+      0 0 20px #f48fb1,
+      0 0 30px #f48fb1,
+      0 0 40px #f48fb1,
+      0 0 50px #f48fb1;
+    margin: 80px 20px 100px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { text-shadow:
+      0 0 10px #f48fb1,
+      0 0 20px #f48fb1,
+      0 0 30px #f48fb1,
+      0 0 40px #f48fb1,
+      0 0 50px #f48fb1; }
+    50% { text-shadow:
+      0 0 20px #f06292,
+      0 0 40px #f06292,
+      0 0 60px #f06292,
+      0 0 80px #f06292,
+      0 0 100px #f06292; }
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+  Your browser does not support audio.
+</audio>
+
+<!-- Floating hearts -->
+<div class="hearts" id="hearts"></div>
+
+<!-- Header with Bubu & Dudu -->
+<header>
+  <h1>Happy Birthday, My Love! 🎂</h1>
+  <p>Here’s to you, the most special person in my life 💖</p>
+</header>
+
+<div class="characters">
+  <div>
+    <img src="https://i.pinimg.com/originals/10/67/f4/1067f4ae1c8ed26e5ff1ec9a2a2ee3cb.png" alt="Bubu holding cake" />
+    <p>Bubu with your cake 🍰</p>
+  </div>
+  <div>
+    <img src="https://i.pinimg.com/originals/fd/27/20/fd272029a0dfb9aef9a1f3df6cc6f262.png" alt="Dudu happy birthday boy" />
+    <p>Dudu, the birthday boy 🥳</p>
+  </div>
+</div>
+
+<!-- Section 1: How We Met -->
+<section class="section" id="section1">
+  <h2>How We Met</h2>
+  <p>
+    I still remember the first time we met — like it was yesterday. Your smile instantly warmed my heart, and the way you looked at me made me feel like I was the only person in the world. That moment changed everything for me. From strangers to friends, and soon to something so beautiful and deep, our story began.
+  </p>
+  <div class="slideshow-container" id="slideshow1">
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=First+Meeting" alt="Our first meeting" /></div>
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=Our+First+Date" alt="First date" /></div>
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=That+Smile" alt="Your smile" /></div>
+    <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+  </div>
+</section>
+
+<!-- Section 2: Moments Together -->
+<section class="section" id="section2">
+  <h2>Moments Together</h2>
+  <p>
+    Every moment we spend together is a treasure. Whether we’re laughing at silly jokes, exploring new places, or simply holding hands in silence — those memories are what make my heart full. You’ve been my strength, my happiness, and my greatest adventure.
+  </p>
+  <div class="slideshow-container" id="slideshow2">
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=Trip+To+Beach" alt="Beach trip" /></div>
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=Movie+Night" alt="Movie night" /></div>
+    <div class="slide"><img src="https://via.placeholder.com/700x400?text=Lazy+Sunday" alt="Lazy Sunday" /></div>
+    <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+  </div>
+</section>
+
+<!-- Section 3: Why I Love You -->
+<section class="section" id="section3">
+  <h2>Why I Love You</h2>
+  <p>
+    I love you because you are kind beyond words, because you see the best in me even when I don’t. You are my confidant, my joy, my everything. Your laughter brightens my darkest days, and your hugs make the world feel safe and warm. You inspire me to be better every day, and I can’t imagine life without you.
+  </p>
+</section>
+
+<!-- Section 4: My Promise -->
+<section class="section" id="section4">
+  <h2>My Promise</h2>
+  <p style="font-weight: 700; color: #d63384; font-size: 1.3em; text-align: center;">
+    I promise to stand by your side through every challenge and celebrate every success with you. To listen, to support, and to love you unconditionally — today, tomorrow, and always.
+  </p>
+</section>
+
+<!-- Final I LOVE YOU animation -->
+<section class="section" id="final-love-section">
+  <div id="final-love">I LOVE YOU ❤️</div>
+</section>
+
+<footer>
+  Made with love by your Bubu 💝
+</footer>
+
+<script>
+  // Floating hearts generation
+  const heartsContainer = document.getElementById("hearts");
+  for(let i=0; i<40; i++){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.width = heart.style.height = (15 + Math.random() * 10) + "px";
+    heartsContainer.appendChild(heart);
+  }
+
+  // Scroll reveal animation for sections
+  const sections = document.querySelectorAll(".section");
+  function revealSections() {
+    const triggerBottom = window.innerHeight * 0.85;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if(top < triggerBottom) {
+        section.classList.add("visible");
+      }
+    });
+  }
+  window.addEventListener("scroll", revealSections);
+  window.addEventListener("load", revealSections);
+
+  // Slideshow functionality - multiple slideshows support
+  let slideIndices = [1,1]; // For two slideshows
+  
+  function showSlides(n, slideshowIdx) {
+    const slides = document.querySelectorAll(`#slideshow${slideshowIdx + 1} .slide`);
+    if(n > slides.length) slideIndices[slideshowIdx] = 1;
+    if(n < 1) slideIndices[slideshowIdx] = slides.length;
+    for(let i=0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndices[slideshowIdx]-1].style.display = "block";
+  }
+  function plusSlides(n, slideshowIdx) {
+    showSlides(slideIndices[slideshowIdx] += n, slideshowIdx);
+  }
+
+  // Initialize slideshows
+  showSlides(1, 0);
+  showSlides(1, 1);
+</script>
+
+</body>
+</html>
